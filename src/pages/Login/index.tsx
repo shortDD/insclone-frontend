@@ -28,7 +28,7 @@ const Card = styled(FlexColumn)`
 `;
 const TopBox = styled(FlexColumn)`
   width: 100%;
-  padding: 30px 35px 10px 35px;
+  padding: 30px 35px 20px 35px;
   border: 1.5px solid;
   border-color: #67646445;
   background-color: #f7f6dc;
@@ -36,6 +36,11 @@ const TopBox = styled(FlexColumn)`
   border-radius: 20px;
   h1 {
     color: #fea82f;
+    transition: all;
+    transition-duration: 300ms;
+    :hover {
+      color: #f89914b6;
+    }
   }
   form {
     display: flex;
@@ -48,28 +53,75 @@ const TopBox = styled(FlexColumn)`
       box-sizing: border-box;
       width: 100%;
       font-size: 16px;
+      letter-spacing: 0.5px;
+      font-weight: bold;
       padding: 16px 12px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       border: none;
       border-radius: 10px;
       background-color: #c9ccd5;
-    }
-    input:hover {
-      background-color: #c2ded1;
+      transition: all;
+      transition-duration: 300ms;
+      :hover {
+        background-color: #c2ded1;
+      }
     }
     button {
+      width: 100%;
       padding: 12px 20px;
       border-radius: 10px;
       font-size: 16px;
+      font-weight: 700;
       border: none;
       background-color: #ffc288;
-      margin-top: 5px;
       margin-bottom: 10px;
       cursor: pointer;
+      transition: all;
+      transition-duration: 300ms;
+      :hover {
+        background-color: #c2ded1;
+      }
     }
-    button:hover {
-      background-color: #c2ded1;
+  }
+  .loginWithFB {
+    color: #4fa095;
+    font-weight: bolder;
+    padding: 20px;
+    font-size: 18px;
+    transition: all;
+    transition-duration: 300ms;
+    :hover {
+      color: #3ac0b0;
     }
+  }
+  .forgotPassword {
+    box-sizing: border-box;
+    height: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #153462;
+    letter-spacing: 0.5px;
+    :hover {
+      border-bottom: 1px solid rgba(21, 52.98, 1);
+    }
+  }
+`;
+const Or = styled.div`
+  width: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  hr {
+    width: 100%;
+  }
+  span {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: bolder;
+    font-size: 14px;
   }
 `;
 const BottomBox = styled.div`
@@ -119,8 +171,13 @@ const Login = () => {
             <input placeholder="Password" />
             <button onClick={() => {}}>Log In</button>
           </form>
-          <span>Or</span>
-          <span>Log in with FaceBook</span>
+          <Or>
+            <hr />
+            <span>OR</span>
+            <hr />
+          </Or>
+          <span className="loginWithFB">Log in with FaceBook</span>
+          <span className="forgotPassword">Forgot password?</span>
         </TopBox>
         <BottomBox>Sign up</BottomBox>
       </Card>
