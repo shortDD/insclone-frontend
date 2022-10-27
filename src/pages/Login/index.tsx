@@ -25,6 +25,10 @@ const Container = styled(FlexColumn)`
 `;
 const Card = styled(FlexColumn)`
   width: 450px;
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    min-width: 300px;
+  }
 `;
 const TopBox = styled(FlexColumn)`
   width: 100%;
@@ -86,6 +90,7 @@ const TopBox = styled(FlexColumn)`
   .loginWithFB {
     color: #4fa095;
     font-weight: bolder;
+    text-align: center;
     padding: 20px;
     font-size: 18px;
     transition: all;
@@ -96,6 +101,7 @@ const TopBox = styled(FlexColumn)`
   }
   .forgotPassword {
     box-sizing: border-box;
+    text-align: center;
     height: 30px;
     font-size: 14px;
     font-weight: 600;
