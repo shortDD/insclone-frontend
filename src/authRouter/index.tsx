@@ -1,10 +1,10 @@
 import { useReactiveVar } from "@apollo/client";
 import { isLoggedInVar } from "../apollo/apollo";
 import Home from "../pages/Home";
-import Login from "../pages/Login";
+import Account from "../pages/Login";
 
 const AuthRouter = () => {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
-  return isLoggedIn ? <Home /> : <Login />;
+  return isLoggedIn ? <Home /> : <Account />;
 };
 export default AuthRouter;

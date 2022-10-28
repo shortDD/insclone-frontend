@@ -1,17 +1,5 @@
-import { isLoggedInVar } from "../../apollo/apollo";
-import { gql, useMutation } from "@apollo/client";
-import { login, loginVariables } from "../../__generated__/login";
-import { useForm } from "react-hook-form";
 import styled from "styled-components";
-const LOGIN_MUTATION = gql`
-  mutation login($userName: String!, $password: String!) {
-    login(userName: $userName, password: $password) {
-      ok
-      error
-      token
-    }
-  }
-`;
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const FlexColumn = styled.div`
   display: flex;
@@ -24,7 +12,7 @@ const Container = styled(FlexColumn)`
   background-color: #ffc090;
 `;
 const Card = styled(FlexColumn)`
-  width: 450px;
+  width: 388px;
   @media screen and (max-width: 450px) {
     width: 100%;
     min-width: 300px;
@@ -36,11 +24,11 @@ const TopBox = styled(FlexColumn)`
   border: 1.5px solid;
   border-color: #67646445;
   background-color: #f7f6dc;
-  box-sizing: border-box;
   border-radius: 20px;
   h1 {
     color: #fea82f;
     transition: all;
+    padding: 20px 0;
     transition-duration: 300ms;
     :hover {
       color: #f89914b6;
@@ -52,46 +40,13 @@ const TopBox = styled(FlexColumn)`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    margin-top: 40px;
-    input {
-      box-sizing: border-box;
-      width: 100%;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      font-weight: bold;
-      padding: 16px 12px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 10px;
-      background-color: #c9ccd5;
-      transition: all;
-      transition-duration: 300ms;
-      :hover {
-        background-color: #c2ded1;
-      }
-    }
-    button {
-      width: 100%;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 700;
-      border: none;
-      background-color: #ffc288;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: all;
-      transition-duration: 300ms;
-      :hover {
-        background-color: #c2ded1;
-      }
-    }
+    margin-top: 20px;
   }
   .loginWithFB {
     color: #4fa095;
     font-weight: bolder;
     text-align: center;
-    padding: 20px;
+    padding: 15px 0;
     font-size: 18px;
     transition: all;
     transition-duration: 300ms;
@@ -112,7 +67,40 @@ const TopBox = styled(FlexColumn)`
     }
   }
 `;
-const Or = styled.div`
+export const Input = styled.input`
+  width: 100%;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  padding: 16px 12px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #eeeeee;
+  transition: all;
+  transition-duration: 300ms;
+  &::placeholder {
+    font-size: 14px;
+  }
+  :hover {
+    background-color: #c2ded1;
+  }
+`;
+export const IButton = styled.button`
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  background-color: #ffc288;
+  cursor: pointer;
+  transition: all;
+  transition-duration: 300ms;
+  :hover {
+    background-color: #c2ded1;
+  }
+`;
+export const Or = styled.div`
   width: 100%;
   display: flex;
   justify-items: center;
@@ -133,61 +121,48 @@ const Or = styled.div`
 const BottomBox = styled.div`
   width: 100%;
   border: 1.5px solid;
-  margin-top: 20px;
   border-color: #67646445;
-  background-color: white;
+  background-color: #f7f6dc;
+  text-align: center;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding: 20px 35px 20px 35px;
+
+  @media screen and (max-width: 350px) {
+    display: flex;
+    flex-direction: column;
+  }
+  a {
+    color: #4fa095;
+    font-weight: bolder;
+    margin: 0 5px;
+    text-decoration: none;
+    transition: all;
+    transition-duration: 300ms;
+    :hover {
+      color: #3ac0b0;
+    }
+  }
 `;
 
-const Login = () => {
-  //-----------------apollo---------
-  // const onCompleted = ({ login }: login) => {
-  //   if (login?.ok) {
-  //     //修改登入状态
-  //     isLoggedInVar(true);
-  //     //存储token
-  //     //跳转页面
-  //   }
-  // };
-  // const [login, { data: loginData, loading }] = useMutation<
-  //   login,
-  //   loginVariables
-  // >(LOGIN_MUTATION, { onCompleted });
-  //点击登入事件
-  // const loginOnClick = () => {
-  //   if (!loading) {
-  //     login({ variables: { userName: "", password: "123" } });
-  //   }
-  // };
-  //-----------------apollo---------
-  //-----------------useForm---------
-  const {
-    register,
-    getValues,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  //-----------------useForm---------
+const Account = () => {
+  const { pathname } = useLocation();
+  const flag = pathname === "/sign-up";
+  console.log(pathname);
   return (
     <Container>
       <Card>
         <TopBox>
-          <h1>Istagram</h1>
-          <form>
-            <input placeholder="Phone number,username,or email" />
-            <input placeholder="Password" />
-            <button onClick={() => {}}>Log In</button>
-          </form>
-          <Or>
-            <hr />
-            <span>OR</span>
-            <hr />
-          </Or>
-          <span className="loginWithFB">Log in with FaceBook</span>
-          <span className="forgotPassword">Forgot password?</span>
+          <Outlet />
         </TopBox>
-        <BottomBox>Sign up</BottomBox>
+        <BottomBox>
+          {flag ? "Have an account?" : "Dont't have an account?"}
+          <Link to={`${flag ? "/" : "/sign-up"}`}>
+            {flag ? "Log in" : "Sign up"}
+          </Link>
+        </BottomBox>
       </Card>
     </Container>
   );
 };
-export default Login;
+export default Account;
