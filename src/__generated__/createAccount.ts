@@ -4,21 +4,23 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: login
+// GraphQL mutation operation: createAccount
 // ====================================================
 
-export interface login_login {
-  __typename: "LoginResult";
+export interface createAccount_createAccount {
+  __typename: "CreateAccountResult";
   ok: boolean;
   error: string | null;
-  token: string | null;
 }
 
-export interface login {
-  login: login_login;
+export interface createAccount {
+  createAccount: createAccount_createAccount;
 }
 
-export interface loginVariables {
+export interface createAccountVariables {
+  firstName: string;
   userName: string;
+  email: string;
   password: string;
+  lastName?: string | null;
 }

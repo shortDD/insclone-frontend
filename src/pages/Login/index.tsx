@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import Theme from "../../component/theme";
 
 const FlexColumn = styled.div`
   display: flex;
@@ -9,9 +10,10 @@ const FlexColumn = styled.div`
 `;
 const Container = styled(FlexColumn)`
   height: 100vh;
-  background-color: #ffc090;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 const Card = styled(FlexColumn)`
+  position: relative;
   width: 388px;
   @media screen and (max-width: 450px) {
     width: 100%;
@@ -22,16 +24,16 @@ const TopBox = styled(FlexColumn)`
   width: 100%;
   padding: 30px 35px 20px 35px;
   border: 1.5px solid;
-  border-color: #67646445;
-  background-color: #f7f6dc;
+  border-color: ${(props) => props.theme.boxBorderColor};
+  background-color: ${(props) => props.theme.boxColor};
   border-radius: 20px;
   h1 {
-    color: #fea82f;
+    color: ${(props) => props.theme.titleColor};
     transition: all;
     padding: 20px 0;
     transition-duration: 300ms;
     :hover {
-      color: #f89914b6;
+      color: ${(props) => props.theme.titleHoverColor};
     }
   }
   form {
@@ -75,14 +77,14 @@ export const Input = styled.input`
   margin-bottom: 15px;
   border: none;
   border-radius: 10px;
-  background-color: #eeeeee;
+  background-color: ${(props) => props.theme.inputBgColor};
   transition: all;
   transition-duration: 300ms;
   &::placeholder {
     font-size: 14px;
   }
   :hover {
-    background-color: #c2ded1;
+    background-color: ${(props) => props.theme.inputHoverColor};
   }
 `;
 export const IButton = styled.button`
@@ -92,12 +94,14 @@ export const IButton = styled.button`
   font-size: 16px;
   font-weight: 700;
   border: none;
-  background-color: #ffc288;
-  cursor: pointer;
+  background-color: ${(props) => props.theme.bgColor};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   transition: all;
   transition-duration: 300ms;
+  margin-bottom: 15px;
   :hover {
-    background-color: #c2ded1;
+    background-color: ${(props) =>
+      props.disabled ? "" : props.theme.inputHoverColor};
   }
 `;
 export const Or = styled.div`
@@ -121,8 +125,8 @@ export const Or = styled.div`
 const BottomBox = styled.div`
   width: 100%;
   border: 1.5px solid;
-  border-color: #67646445;
-  background-color: #f7f6dc;
+  border-color: ${(props) => props.theme.boxBorderColor};
+  background-color: ${(props) => props.theme.boxColor};
   text-align: center;
   border-radius: 20px;
   margin-top: 20px;
@@ -148,10 +152,10 @@ const BottomBox = styled.div`
 const Account = () => {
   const { pathname } = useLocation();
   const flag = pathname === "/sign-up";
-  console.log(pathname);
   return (
     <Container>
       <Card>
+        <Theme />
         <TopBox>
           <Outlet />
         </TopBox>
