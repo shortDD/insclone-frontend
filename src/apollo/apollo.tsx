@@ -10,18 +10,20 @@ import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext } from "@apollo/client/link/context";
-import { SummerTheme } from "../styles/styles";
+import { SummerTheme, WhiteTheme } from "../styles/styles";
 
 const token = localStorage.getItem(TOKEN_KEY);
 const isLoggedInVar = makeVar(Boolean(token));
 const authToken = makeVar(token);
-const themeVar = makeVar(SummerTheme);
+const themeVar = makeVar(WhiteTheme);
 const logUserIn = (token: string) => {
   isLoggedInVar(true);
+  authToken(token);
   localStorage.setItem(TOKEN_KEY, token);
 };
 const logUserOut = () => {
   isLoggedInVar(false);
+  authToken(null);
   localStorage.removeItem(TOKEN_KEY);
 };
 const httpLink = createHttpLink({
@@ -66,4 +68,4 @@ const client = new ApolloClient({
 });
 
 export default client;
-export { isLoggedInVar, themeVar, logUserIn, logUserOut };
+export { isLoggedInVar, themeVar, authToken, logUserIn, logUserOut };

@@ -20,13 +20,19 @@ const Card = styled(FlexColumn)`
     min-width: 300px;
   }
 `;
-const TopBox = styled(FlexColumn)`
+const BaseBox = styled.div`
   width: 100%;
   padding: 30px 35px 20px 35px;
   border: 1.5px solid;
   border-color: ${(props) => props.theme.boxBorderColor};
   background-color: ${(props) => props.theme.boxColor};
   border-radius: 20px;
+`;
+const TopBox = styled(BaseBox)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   h1 {
     color: ${(props) => props.theme.titleColor};
     transition: all;
@@ -122,16 +128,10 @@ export const Or = styled.div`
     font-size: 14px;
   }
 `;
-const BottomBox = styled.div`
-  width: 100%;
-  border: 1.5px solid;
-  border-color: ${(props) => props.theme.boxBorderColor};
-  background-color: ${(props) => props.theme.boxColor};
-  text-align: center;
-  border-radius: 20px;
+const BottomBox = styled(BaseBox)`
   margin-top: 20px;
   padding: 20px 35px 20px 35px;
-
+  text-align: center;
   @media screen and (max-width: 350px) {
     display: flex;
     flex-direction: column;

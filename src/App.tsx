@@ -8,6 +8,8 @@ import client, { isLoggedInVar, themeVar } from "./apollo/apollo";
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
 import Login from "./pages/Login/login";
 import SignUp from "./pages/Login/sign-up";
+import Header from "./component/header";
+import Profile from "./pages/Profile";
 function App() {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const currentTheme = useReactiveVar(themeVar);
@@ -15,6 +17,7 @@ function App() {
     <ThemeProvider theme={currentTheme}>
       <ApolloProvider client={client}>
         <div className="App">
+          {isLoggedIn && <Header />}
           <Routes>
             <Route path="/" element={<AuthRouter />}>
               {!isLoggedIn && (
@@ -24,6 +27,7 @@ function App() {
                 </>
               )}
             </Route>
+            <Route path="/profile/:userName" element={<Profile />} />
             <Route path="/not-found" element={<NotFound />} />
             <Route path="*" element={<Navigate to="not-found" />} />
           </Routes>

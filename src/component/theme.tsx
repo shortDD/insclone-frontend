@@ -22,6 +22,7 @@ const ThemeNav = styled.div`
     font-size: 12px;
     font-weight: bolder;
     border-radius: 50%;
+    cursor: pointer;
     width: 12px;
     height: 12px;
     padding: 2px;
